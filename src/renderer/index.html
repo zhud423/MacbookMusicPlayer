@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MacBook Retro Vinyl CD Player</title>
+  
+  <!-- 设计系统与 CSS 样式集 -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/vinyl.css">
+  <link rel="stylesheet" href="css/tonearm.css">
+  <link rel="stylesheet" href="css/tracklist.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <link rel="stylesheet" href="css/idle.css">
+  <link rel="stylesheet" href="css/settings.css">
+  
+  <!-- 引入 Google 复古衬线与现代无衬线字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- 主应用容器 -->
+  <div id="app-container" class="app-container idle-mode">
+
+    <!-- 背景漫射氛围光晕 -->
+    <div id="ambient-light" class="ambient-light"></div>
+
+    <!-- ===== 左侧黑胶转盘与唱针展示区 (60%) ===== -->
+    <main class="vinyl-section">
+      <div class="turntable-wood-base">
+        <!-- 唱盘底座拉丝金属环 -->
+        <div class="turntable-platter-base">
+          
+          <!-- 黑胶唱片主体 (旋转主体) -->
+          <div id="vinyl-disc" class="vinyl-disc">
+            <!-- 唱片同心沟槽纹理 -->
+            <div class="disc-grooves"></div>
+            <!-- 动态反光高光 -->
+            <div class="disc-reflection"></div>
+            <!-- 中心专辑封面与唱盘标贴 -->
+            <div class="disc-center-label">
+              <img id="album-cover-img" src="assets/images/default-cover.jpg" alt="Album Cover" class="cover-img">
+              <div class="center-hole"></div>
+            </div>
+          </div>
+
+          <!-- 复古唱针 (Tonearm) -->
+          <div id="tonearm" class="tonearm-assembly">
+            <div class="tonearm-base">
+              <div class="base-pivot"></div>
+            </div>
+            <div class="tonearm-stick"></div>
+            <div class="tonearm-head">
+              <div class="stylus-cartridge"></div>
+              <div class="stylus-needle-light"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== 右侧专辑信息与曲目面板区 (40%) ===== -->
+    <aside class="tracklist-section">
+      
+      <!-- 专辑基本信息 Header -->
+      <header class="album-header">
+        <div class="album-badge">
+          <span class="badge-icon">💿</span>
+          <span id="disc-format-tag" class="badge-text">STEREO AUDIO CD</span>
+        </div>
+        <h1 id="album-title" class="album-title">请插入 CD 唱片</h1>
+        <h2 id="album-artist" class="album-artist">插入光盘后自动识别播放</h2>
+      </header>
+
+      <!-- 曲目列表容器 -->
+      <section class="tracks-scroll-container">
+        <div class="tracks-list-header">
+          <span># Track</span>
+          <span>Title</span>
+          <span class="text-right">Duration</span>
+        </div>
+        <ul id="track-list" class="track-list">
+          <!-- JS 动态渲染曲目列表 -->
+        </ul>
+      </section>
+
+      <!-- 底部播放进度条 -->
+      <div class="progress-section">
+        <div class="time-display">
+          <span id="current-time">00:00</span>
+          <span id="total-duration">00:00</span>
+        </div>
+        <div id="progress-bar-container" class="progress-bar-container">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          <div id="progress-thumb" class="progress-thumb"></div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ===== 底部浮动控制栏 ===== -->
+    <footer class="controls-bar">
+      
+      <!-- 左侧品牌标示 & 设置按钮 -->
+      <div class="controls-left">
+        <button id="btn-settings" class="icon-btn" title="系统设置">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+          </svg>
+        </button>
+        <button id="btn-test-mock" class="pill-btn dev-btn hidden" title="开发调试: 模拟插盘/退盘试听">
+          🧪 试听/模拟 CD
+        </button>
+      </div>
+
+      <!-- 中央主播放控制键 -->
+      <div class="controls-center">
+        <button id="btn-prev" class="control-btn icon-only" title="上一曲 (←)">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </button>
+
+        <button id="btn-play-pause" class="control-btn play-main-btn" title="播放/暂停 (Space)">
+          <!-- 播放图标 -->
+          <svg id="icon-play" class="btn-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <!-- 暂停图标 -->
+          <svg id="icon-pause" class="btn-icon hidden" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+
+        <button id="btn-next" class="control-btn icon-only" title="下一曲 (→)">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 右侧音量与弹出控制 -->
+      <div class="controls-right">
+        <div class="volume-container">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" class="volume-icon">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+          <input type="range" id="volume-slider" min="0" max="100" value="80" class="volume-slider">
+        </div>
+
+        <button id="btn-eject" class="pill-btn eject-btn" title="弹出 CD 光盘 (E)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 5L5 15h14l-7-10zm-7 12h14v2H5v-2z"/>
+          </svg>
+          <span>弹出 CD</span>
+        </button>
+      </div>
+
+    </footer>
+
+    <!-- ===== CD 未插入时的复古待机引导画面 ===== -->
+    <div id="idle-overlay" class="idle-overlay">
+      <div class="idle-content">
+        <div class="idle-vinyl-graphic">
+          <div class="idle-ring ring-1"></div>
+          <div class="idle-ring ring-2"></div>
+          <div class="idle-disc-icon">💿</div>
+        </div>
+        <h2 class="idle-title">PLEASE INSERT AN AUDIO CD</h2>
+        <p class="idle-desc">请将 CD 唱片推入 MacBook 光驱，将自动开启复古黑胶音乐之旅</p>
+        <button id="btn-idle-mock" class="idle-action-btn hidden">
+          ✨ 点击试听模拟 CD
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== CD 读取加载中 Loading 遮罩 ===== -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+      <div class="spinner-vinyl"></div>
+      <p class="loading-text">正在读取 CD Table of Contents 与匹配 MusicBrainz 元数据...</p>
+    </div>
+
+    <!-- ===== 系统设置与安全退出面板 ===== -->
+    <div id="settings-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>⚙️ 唱机系统设置</h3>
+          <button id="btn-close-settings" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">开机 Kiosk 模式</div>
+              <div class="setting-hint">全屏锁定播放界面，隐藏桌面与菜单栏</div>
+            </div>
+            <span class="status-tag active">已启用</span>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">防休眠保护</div>
+              <div class="setting-hint">防止 MacBook 自动掉电或合盖休眠</div>
+            </div>
+            <span class="status-tag active">已启用</span>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">退出快捷键</div>
+              <div class="setting-hint">连续长按键盘 Esc 键 3 秒安全退出</div>
+            </div>
+            <span class="key-badge">Esc (3s)</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-quit-app" class="danger-btn">
+            🚪 退出播放器程序
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 引入渲染进程组件 JS 脚本 -->
+  <script src="js/color-extractor.js"></script>
+  <script src="js/vinyl-animator.js"></script>
+  <script src="js/track-manager.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

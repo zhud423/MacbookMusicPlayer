@@ -1,0 +1,89 @@
+/* 复古黄铜唱针总成 */
+.tonearm-assembly {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  width: 100px;
+  height: 240px;
+  transform-origin: 40px 40px; /* 轴心旋转点 */
+  transform: rotate(-34deg); /* 待机开放视角 (-34度) */
+  transition: transform 0.9s var(--ease-elastic);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* 播放落针状态 (0度) */
+.tonearm-assembly.playing {
+  transform: rotate(0deg);
+}
+
+/* 随着歌曲进展的进针视角 (-8度范围微摆) */
+.tonearm-assembly.playing-track {
+  transform: rotate(calc(0deg + var(--progress-angle, 0deg)));
+}
+
+/* 唱针转轴底座 */
+.tonearm-base {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ecd093 0%, #a37937 80%, #523b18 100%);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.base-pivot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2b2218;
+  border: 2px solid #dca854;
+}
+
+/* 唱针弯臂 (Stick) */
+.tonearm-stick {
+  position: absolute;
+  top: 40px;
+  left: 36px;
+  width: 8px;
+  height: 150px;
+  background: linear-gradient(90deg, #b88d44, #fce0a6, #966e2a);
+  border-radius: 4px;
+  transform: rotate(14deg);
+  transform-origin: top center;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 唱针头 (Head & Needle Cartridge) */
+.tonearm-head {
+  position: absolute;
+  bottom: 25px;
+  left: 58px;
+  width: 22px;
+  height: 42px;
+  background: linear-gradient(135deg, #3d3326 0%, #17130e 100%);
+  border-radius: 3px;
+  border: 1px solid var(--brass-accent);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  transform: rotate(22deg);
+}
+
+/* 唱针头暖光指示灯 */
+.stylus-needle-light {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--amber-gold);
+  box-shadow: 0 0 8px var(--amber-gold);
+}

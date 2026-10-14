@@ -1,0 +1,18 @@
+appId: com.macbook.cdplayer
+productName: MacbookCDPlayer
+copyright: Copyright © 2026
+directories:
+  output: dist
+  buildResources: build
+files:
+  - "src/**/*"
+  - "package.json"
+mac:
+  category: public.app-category.music
+  target:
+    - target: dir
+      arch:
+        - x64
+  minimumSystemVersion: "10.13.0"
+  hardenedRuntime: false
+  gatekeeperAssess: false

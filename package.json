@@ -1,0 +1,27 @@
+{
+  "name": "macbook-cd-player",
+  "version": "1.0.0",
+  "description": "MacBook Retro Vinyl CD Player",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder"
+  },
+  "keywords": [
+    "cd-player",
+    "vinyl",
+    "macbook",
+    "electron",
+    "retro"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.3.27",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.5"
+  }
+}

@@ -1,0 +1,159 @@
+/* 专辑 Header */
+.album-header {
+  margin-bottom: 25px;
+}
+
+.album-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(220, 168, 84, 0.12);
+  border: 1px solid rgba(220, 168, 84, 0.25);
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.badge-icon {
+  font-size: 12px;
+}
+
+.badge-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--amber-gold);
+  letter-spacing: 1px;
+}
+
+.album-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-artist {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* 曲目列表容器 */
+.tracks-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 5px;
+}
+
+/* 隐藏系统滚动条 */
+.tracks-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+.tracks-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.tracks-list-header {
+  display: grid;
+  grid-template-columns: 50px 1fr 70px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+}
+
+.track-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.track-item {
+  display: grid;
+  grid-template-columns: 50px 1fr 70px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.track-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+}
+
+/* 当前播放高亮状态 */
+.track-item.active {
+  background: linear-gradient(90deg, rgba(220, 168, 84, 0.2) 0%, rgba(220, 168, 84, 0.05) 100%);
+  border-left: 3px solid var(--amber-gold);
+  color: var(--amber-gold);
+  font-weight: 600;
+}
+
+.track-num {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.track-item.active .track-num {
+  color: var(--amber-gold);
+}
+
+.track-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* 底部时间与进度 */
+.progress-section {
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #dca854, #f4c468);
+  border-radius: 3px;
+  transition: width 0.3s linear;
+}
